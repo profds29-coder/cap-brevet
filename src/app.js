@@ -11,7 +11,7 @@
   const LVN = ['Non commencé', 'Novice', 'Débrouillé(e)', 'Averti(e)', 'Expert(e)'];
   const RULES = ['8 bonnes réponses sur les 10 dernières', '8 bonnes réponses sur les 10 dernières, avec au plus 2 indices en tout', '8 bonnes réponses sur les 10 dernières, sans indice', '8 bonnes réponses sur les 10 dernières, chronomètre lancé'];
   const MAXH = [3, 3, 2, 1, 0];
-  const PRIORITY = ['frac', 'eq', 'prop', 'calc', 'litt', 'pyth', 'fonc', 'stat', 'proba', 'pui', 'aire', 'conv', 'thales', 'trigo', 'arith', 'angles', 'algo'];
+  const PRIORITY = ['frac', 'eq', 'prop', 'calc', 'litt', 'pyth', 'fonc', 'stat', 'proba', 'pui', 'aire', 'conv', 'thales', 'trigo', 'transfo', 'arith', 'angles', 'algo'];
   const BREVET = new Date('2027-06-24T08:00:00');
   const KEY = 'capbrevet.v1';
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

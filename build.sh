@@ -8,7 +8,7 @@ python3 - <<'PY'
 import hashlib, json, os, re, shutil
 shell = open('src/shell.html').read()
 css = open('src/style.css').read() + '\n' + open('src/extra.css').read()
-js = '\n'.join(open('src/' + f).read() for f in ['moteur.js', 'notions.js', 'problemes.js', 'app.js'])
+js = '\n'.join(open('src/' + f).read() for f in ['moteur.js', 'notions.js', 'banque-plus.js', 'problemes.js', 'app.js'])
 page = shell.replace('/*CSS*/', css).replace('/*JS*/', js)
 open('dist/index.html', 'w').write(page)
 
