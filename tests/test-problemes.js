@@ -1,7 +1,7 @@
 /* Tests des sujets de problèmes : la copie modèle obtient la note maximale,
    une copie vide obtient 0, et une erreur de calcul à la question 1 est
    reportée sans faire perdre les points des questions suivantes. */
-require('../src/moteur.js'); require('../src/notions.js'); require('../src/problemes.js');
+require('../src/moteur.js'); require('../src/notions.js'); require('../src/banque-plus.js'); require('../src/problemes.js');
 const { PB } = globalThis; let fails = 0, total = 0; const rep = {};
 const bad = (id, m) => { fails++; (rep[id] ||= []).push(m); };
 for (const id of Object.keys(PB.GENS)) for (let s = 1; s <= 500; s++) {

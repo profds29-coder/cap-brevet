@@ -2,7 +2,7 @@
    de nombreuses versions et on vérifie que la réponse attendue est jugée
    juste, que la valeur est un nombre fini, et qu'aucune « erreur fréquente »
    ne coïncide avec la bonne réponse. */
-require('../src/moteur.js'); require('../src/notions.js');
+require('../src/moteur.js'); require('../src/notions.js'); require('../src/banque-plus.js');
 const { BANK, M } = globalThis;
 let fails = 0, total = 0; const report = {};
 for (const no of BANK.NOTIONS) for (const g of no.gens) for (const L of g.lv) {
