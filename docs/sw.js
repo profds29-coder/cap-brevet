@@ -1,6 +1,6 @@
 /* Service worker de Cap Brevet : garde l'application en mémoire pour qu'elle marche sans connexion.
    La version (VERSION) change à chaque construction : l'ancienne copie est alors remplacée. */
-const VERSION = '8c3a84cff4';
+const VERSION = '2a98ea5401';
 const CACHE = 'capbrevet-' + VERSION;
 const FICHIERS = ["./", "fonts/AtkinsonHyperlegible-1.woff2", "fonts/AtkinsonHyperlegible-2.woff2", "fonts/AtkinsonHyperlegible-3.woff2", "fonts/AtkinsonHyperlegible-4.woff2", "fonts/AtkinsonHyperlegible-5.woff2", "fonts/AtkinsonHyperlegible-6.woff2", "fonts/BricolageGrotesque-7.woff2", "fonts/BricolageGrotesque-8.woff2", "fonts/polices.css", "icones/apple-touch-icon.png", "icones/icone-192.png", "icones/icone-512.png", "icones/icone-maskable-512.png", "icones/icone-maskable.svg", "icones/icone.svg", "index.html", "manifest.webmanifest"];
 

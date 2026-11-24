@@ -17,6 +17,10 @@ for (const no of BANK.NOTIONS) for (const g of no.gens) for (const L of g.lv) {
     const unit = q.unit || '';
     const g1 = M.grade(q, q.ans, unit);
     if (g1.s !== 'ok') pb.push(`réponse attendue "${q.ans}" jugée ${g1.s} (${g1.t} ${g1.m})`);
+    if (/\^/.test(String(q.ans))) { // même réponse tapée avec des exposants en petits chiffres (x², 10⁴)
+      const sup = String(q.ans).replace(/\^\(?(-?\d+)\)?/g, (m, e) => e.replace(/-/g, '⁻').replace(/\d/g, d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d])).replace(/\*/g, '×');
+      const g2 = M.grade(q, sup, unit); if (g2.s !== 'ok') pb.push(`réponse "${sup}" jugée ${g2.s} (${g2.t})`);
+    }
     for (const e of q.errs || []) {
       if (e.v !== undefined && !q.f && q.type !== 'set' && q.type !== 'qcm' && Number.isFinite(e.v) && Math.abs(e.v - q.v) < 1e-9) pb.push('erreur = bonne réponse');
       if (e.f && q.f && [-1.7, .3, 2.9].every(x => Math.abs(e.f(x) - q.f(x)) < 1e-9)) pb.push('erreur f = bonne réponse');

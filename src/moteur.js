@@ -32,7 +32,10 @@
   const SUP = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-' };
   function norm(s) {
     s = String(s).trim();
-    s = s.replace(/[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, m => '^(' + [...m].map(c => SUP[c]).join('') + ')');
+    // Exposants tapés en petits chiffres (10⁴, x², 10⁻³) : on les écrit avec ^ sans ajouter
+    // de parenthèses, sinon « 5x² » serait vu comme « pas encore réduit » ou 2³ × 3² comme « pas décomposé ».
+    s = s.replace(/([⁻⁰¹²³⁴⁵⁶⁷⁸⁹])\s+(?=[⁰¹²³⁴⁵⁶⁷⁸⁹])/g, '$1');
+    s = s.replace(/[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+(\s*)(?=([0-9.,]?))/g, (m, sp, nx) => '^' + [...m.trim()].map(c => SUP[c]).join('') + (nx ? '*' : sp));
     return s.replace(/[−–—]/g, '-').replace(/[×·∙]/g, '*').replace(/÷|:/g, '/').replace(/,/g, '.')
       .replace(/π/g, 'p').replace(/pi/gi, 'p').replace(/√/g, 'r').replace(/X/g, 'x').replace(/Y/g, 'y')
       .replace(/\s+/g, '');
@@ -193,6 +196,8 @@
     const pts = q.pts || 1;
     raw = String(raw ?? '').trim();
     if (!raw) return { s: 'vide', pts: 0, t: 'Pas de réponse', m: '' };
+    // Sans x dans la réponse attendue, un « x » entre deux nombres est un signe fois : 3,45 x 10^4, 2³ x 3².
+    if (!q.f) raw = raw.replace(/([0-9⁰¹²³⁴⁵⁶⁷⁸⁹)])\s*[xX]\s*(?=[0-9(√])/g, '$1×');
 
     if (q.type === 'qcm') {
       const ok = Number(raw) === q.correct;

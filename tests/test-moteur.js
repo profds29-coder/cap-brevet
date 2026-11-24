@@ -38,4 +38,20 @@ t('erreur fréquente', { v: 60, errs: [{ v: 20, m: 'réduction' }] }, '20', '', 
 t('écriture illisible', { v: 3 }, '3++', '', 'ko');
 t('vide', { v: 3 }, '', '', 'vide');
 t('qcm', { type: 'qcm', correct: 2 }, '2', '', 'ok');
+// Exposants en petits chiffres (10⁴, x², 10⁻³) et signe fois tapé « x »
+t('10⁴ puissance de 10', { v: 1e4, form: 'p10' }, '10⁴', '', 'ok');
+t('10^4 puissance de 10', { v: 1e4, form: 'p10' }, '10^4', '', 'ok');
+t('10000 au lieu de 10⁴', { v: 1e4, form: 'p10' }, '10000', '', 'part');
+t('10⁻³', { v: 1e-3, form: 'p10' }, '10⁻³', '', 'ok');
+t('10⁻ ³ avec espace', { v: 1e-3, form: 'p10' }, '10⁻ ³', '', 'ok');
+t('10⁴ = 10000 sans forme imposée', { v: 1e4 }, '10⁴', '', 'ok');
+t('10000 sans forme imposée', { v: 1e4 }, '10000', '', 'ok');
+t('3,45 × 10⁴ scientifique', { v: 34500, form: 'sci' }, '3,45 × 10⁴', '', 'ok');
+t('3,45 x 10^4 scientifique', { v: 34500, form: 'sci' }, '3,45 x 10^4', '', 'ok');
+t('2³ × 3² facteurs premiers', { v: 72, form: 'primes' }, '2³ × 3²', '', 'ok');
+t('2³ x 3² facteurs premiers', { v: 72, form: 'primes' }, '2³ x 3²', '', 'ok');
+t('5x² + 4x − 5 réduit', { f: x => 5 * x * x + 4 * x - 5, form: 'red' }, '5x² + 4x − 5', '', 'ok');
+t('x² + 7x développé', { f: x => x * x + 7 * x, form: 'dev' }, 'x²+7x', '', 'ok');
+t('x² non réduit', { f: x => 2 * x * x, form: 'red' }, 'x²+x²', '', 'part');
+t('3x avec x variable', { f: x => 3 * x }, '3x', '', 'ok');
 console.log(`${ok}/${ok + ko} tests du moteur réussis`); process.exit(ko ? 1 : 0);
